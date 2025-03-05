@@ -142,6 +142,7 @@ exports.deletePost = (req, res, next) => {
 
     Post.findById(postId)
         .then(post => {
+            
             if (!post) {
                 const error = new Error('post does not exist!');
                 error.statusCode = 404;

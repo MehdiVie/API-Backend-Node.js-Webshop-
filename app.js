@@ -66,7 +66,7 @@ app.use((error,req,res,next) => {
 })
 
 mongoose.connect(
-    'mongodb+srv://UserReadWrite:0G5i8YVMOK2VZspE@cluster0.pdry4.mongodb.net/messages?retryWrites=true&w=majority&appName=Cluster0'
+    'mongodb+srv://UserReadWrite:<mypass>@cluster0.pdry4.mongodb.net/messages?retryWrites=true&w=majority&appName=Cluster0'
 )
     .then(result => {
         app.listen(8080);

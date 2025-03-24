@@ -5,6 +5,7 @@ const feedRoutes = require('./routes/feed');
 const authRoutes = require('./routes/auth');
 const mongoose = require('mongoose');
 const multer = require('multer');
+const socket = require("./socket");
 
 const app = express();
 
@@ -66,10 +67,17 @@ app.use((error,req,res,next) => {
 })
 
 mongoose.connect(
-    'mongodb+srv://UserReadWrite:<mypass>@cluster0.pdry4.mongodb.net/messages?retryWrites=true&w=majority&appName=Cluster0'
+    'mongodb+srv://UserReadWrite:TcaDJEQnQYgn8TTC@cluster0.pdry4.mongodb.net/messages?retryWrites=true&w=majority&appName=Cluster0'
 )
     .then(result => {
-        app.listen(8080);
+        const server = require("http").createServer(app);
+        const io = socket.init(server); 
+        server.listen(8080, () => {
+            console.log("Server is running on port 8080");
+          });
+        io.on("connection", (socket) => {
+            console.log("Client connected!");
+          });
     })
     .catch(err => console.log(err));
 

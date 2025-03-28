@@ -9,6 +9,13 @@ const socket = require("./socket");
 
 const app = express();
 
+const cors = require('cors');
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {
         // Ensure the images directory is correctly referenced relative to the project folder
